@@ -32,7 +32,9 @@
 
 
 (function(window, document) {
-
+    window['Asc']['Addons'] = window['Asc']['Addons'] || {};
+	window['Asc']['Addons']['content-сontrols'] = true; // register addon
+	
 	window['Asc']['asc_docs_api'].prototype['asc_AddContentControl'] = window['Asc']['asc_docs_api'].prototype.asc_AddContentControl = function(nType, oContentControlPr)
 	{
 		var oLogicDocument = this.WordControl.m_oLogicDocument;
