@@ -122,6 +122,7 @@
 			{
 				oLogicDocument.StartAction(AscDFH.historydescription_Document_AddContentControlCheckBox);
 				oLogicDocument.AddContentControlCheckBox(oPr);
+				oLogicDocument.UpdateInterface();
 				oLogicDocument.Recalculate();
 				oLogicDocument.FinalizeAction();
 			}
@@ -138,6 +139,7 @@
 		{
 			oLogicDocument.StartAction(AscDFH.historydescription_Document_AddContentControlPicture);
 			oLogicDocument.AddContentControlPicture();
+			oLogicDocument.UpdateInterface();
 			oLogicDocument.Recalculate();
 			oLogicDocument.FinalizeAction();
 		}
@@ -159,6 +161,7 @@
 				oLogicDocument.AddContentControlDropDownList(oPr);
 
 			oLogicDocument.Recalculate();
+			oLogicDocument.UpdateInterface();
 			oLogicDocument.UpdateSelection();
 			oLogicDocument.FinalizeAction();
 		}
@@ -175,6 +178,7 @@
 			oLogicDocument.StartAction(AscDFH.historydescription_Document_AddContentControlList);
 			oLogicDocument.AddContentControlDatePicker(oPr);
 			oLogicDocument.Recalculate();
+			oLogicDocument.UpdateInterface();
 			oLogicDocument.UpdateSelection();
 			oLogicDocument.FinalizeAction();
 		}
