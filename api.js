@@ -88,7 +88,7 @@
 		}
 		return oResult;
 	};
-	window['Asc']['asc_docs_api'].prototype['asc_AddContentControlCheckBox'] = window['Asc']['asc_docs_api'].prototype.asc_AddContentControlCheckBox = function(oPr)
+	window['Asc']['asc_docs_api'].prototype['asc_AddContentControlCheckBox'] = window['Asc']['asc_docs_api'].prototype.asc_AddContentControlCheckBox = function(oPr, oFormPr)
 	{
 		var oLogicDocument = this.private_GetLogicDocument();
 		if (!oLogicDocument)
@@ -121,7 +121,11 @@
 			if (!oLogicDocument.IsSelectionLocked(AscCommon.changestype_Paragraph_Content))
 			{
 				oLogicDocument.StartAction(AscDFH.historydescription_Document_AddContentControlCheckBox);
-				oLogicDocument.AddContentControlCheckBox(oPr);
+
+				var oCC = oLogicDocument.AddContentControlCheckBox(oPr);
+				if (oCC && oFormPr)
+					oCC.SetFormPr(oFormPr);
+
 				oLogicDocument.UpdateInterface();
 				oLogicDocument.Recalculate();
 				oLogicDocument.FinalizeAction();
