@@ -1,7 +1,8 @@
 {
   "sdk": {
     "min": [
-      "api.js"
+      "api.js",
+      "api_plugins.js"
 
     ],
     "common": [      
