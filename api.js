@@ -141,7 +141,10 @@
 
 				var oCC = oLogicDocument.AddContentControlCheckBox(oPr);
 				if (oCC && oFormPr)
+				{
 					oCC.SetFormPr(oFormPr);
+					oCC.UpdatePlaceHolderTextPrForForm();
+				}
 
 				oLogicDocument.UpdateInterface();
 				oLogicDocument.Recalculate();
@@ -162,7 +165,10 @@
 
 			var oCC = oLogicDocument.AddContentControlPicture();
 			if (oCC && oFormPr)
+			{
 				oCC.SetFormPr(oFormPr);
+				oCC.UpdatePlaceHolderTextPrForForm();
+			}
 
 			oLogicDocument.UpdateInterface();
 			oLogicDocument.Recalculate();
@@ -187,7 +193,10 @@
 				oCC = oLogicDocument.AddContentControlDropDownList(oPr);
 
 			if (oCC && oFormPr)
+			{
 				oCC.SetFormPr(oFormPr);
+				oCC.UpdatePlaceHolderTextPrForForm();
+			}
 
 			oLogicDocument.Recalculate();
 			oLogicDocument.UpdateInterface();
@@ -225,7 +234,10 @@
 
 			var oCC = oLogicDocument.AddContentControlTextForm(oPr);
 			if (oCC && oFormPr)
+			{
 				oCC.SetFormPr(oFormPr);
+				oCC.UpdatePlaceHolderTextPrForForm();
+			}
 
 			oLogicDocument.UpdateInterface();
 			oLogicDocument.Recalculate();
