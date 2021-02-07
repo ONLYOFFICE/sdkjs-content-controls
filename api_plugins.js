@@ -77,25 +77,45 @@
 	 * @memberof Api
 	 * @typeofeditors ["CDE"]
 	 * @alias AddContentControlCheckBox
-	 * @param {ContentControlCkeckBoxProperties}  [ properties = {} ] is property of content control checkbox
+	 * @param {ContentControlCkeckBoxProperties}  [ checkBoxPr = {} ] is property of content control checkbox
+	 * @param {ContentControlProperties}  [ commonPr = {} ] is property of content control
 	 * @example
-	 * var properties = {"Checked": false, "CheckedSymbol": 9746, "UncheckedSymbol": 9744};
-	 * window.Asc.plugin.executeMethod("AddContentControlCheckBox", [properties]);
+	 * var checkBoxPr = {"Checked": false, "CheckedSymbol": 9746, "UncheckedSymbol": 9744};
+	 * var commonPr = {"Id": 100, "Tag": "CC_Tag", "Lock": 3};
+	 * window.Asc.plugin.executeMethod("AddContentControlCheckBox", [checkBoxPr, commonPr]);
 	 */
-	window["asc_docs_api"].prototype["pluginMethod_AddContentControlCheckBox"] = function(properties)
+	window["asc_docs_api"].prototype["pluginMethod_AddContentControlCheckBox"] = function(checkBoxPr, commonPr)
 	{
 		var oPr;
-		if (properties)
+		if (checkBoxPr)
 		{
 			oPr = new AscCommon.CSdtCheckBoxPr()
-			if (properties["Checked"])
-				oPr.SetChecked(properties["Checked"]);
-			if (properties["CheckedSymbol"])
-				oPr.SetCheckedSymbol(properties["CheckedSymbol"]);
-			if (properties["UncheckedSymbol"])
-				oPr.SetUncheckedSymbol(properties["UncheckedSymbol"]);
+			if (checkBoxPr["Checked"])
+				oPr.SetChecked(checkBoxPr["Checked"]);
+			if (checkBoxPr["CheckedSymbol"])
+				oPr.SetCheckedSymbol(checkBoxPr["CheckedSymbol"]);
+			if (checkBoxPr["UncheckedSymbol"])
+				oPr.SetUncheckedSymbol(checkBoxPr["UncheckedSymbol"]);
 		}
-		this.asc_AddContentControlCheckBox(oPr);
+
+		var _content_control_pr;
+		if (commonPr)
+		{
+			_content_control_pr      = new AscCommon.CContentControlPr();
+			_content_control_pr.Id   = commonPr["Id"];
+			_content_control_pr.Tag  = commonPr["Tag"];
+			_content_control_pr.Lock = commonPr["Lock"];
+
+			_content_control_pr.Alias = commonPr["Alias"];
+
+			if (undefined !== commonPr["Appearance"])
+				_content_control_pr.Appearance = commonPr["Appearance"];
+
+			if (undefined !== commonPr["Color"])
+				_content_control_pr.Color = new Asc.asc_CColor(commonPr["Color"]["R"], commonPr["Color"]["G"], commonPr["Color"]["B"]);
+		}
+
+		this.asc_AddContentControlCheckBox(oPr, null, _content_control_pr);
 	};
 
 	/**
@@ -103,12 +123,31 @@
 	 * @memberof Api
 	 * @typeofeditors ["CDE"]
 	 * @alias AddContentControlPicture
+	 * @param {ContentControlProperties}  [ commonPr = {} ] is property of content control
 	 * @example
-	 * window.Asc.plugin.executeMethod("AddContentControlPicture");
+	 * var commonPr = {"Id": 100, "Tag": "CC_Tag", "Lock": 3};
+	 * window.Asc.plugin.executeMethod("AddContentControlPicture", [commonPr]);
 	 */
-	window["asc_docs_api"].prototype["pluginMethod_AddContentControlPicture"] = function()
+	window["asc_docs_api"].prototype["pluginMethod_AddContentControlPicture"] = function(commonPr)
 	{
-		this.asc_AddContentControlPicture();
+		var _content_control_pr;
+		if (commonPr)
+		{
+			_content_control_pr      = new AscCommon.CContentControlPr();
+			_content_control_pr.Id   = commonPr["Id"];
+			_content_control_pr.Tag  = commonPr["Tag"];
+			_content_control_pr.Lock = commonPr["Lock"];
+
+			_content_control_pr.Alias = commonPr["Alias"];
+
+			if (undefined !== commonPr["Appearance"])
+				_content_control_pr.Appearance = commonPr["Appearance"];
+
+			if (undefined !== commonPr["Color"])
+				_content_control_pr.Color = new Asc.asc_CColor(commonPr["Color"]["R"], commonPr["Color"]["G"], commonPr["Color"]["B"]);
+		}
+
+		this.asc_AddContentControlPicture(null, _content_control_pr);
 	};
 
 	/**
@@ -117,23 +156,43 @@
 	 * @typeofeditors ["CDE"]
 	 * @alias AddContentControlList
 	 * @param {ContentControlType} type is a numeric value that specifies the content control type
-	 * @param {Array[{String, String}]}  [ List = [{sDisplay, sValue}] ] is property of content control List
+	 * @param {Array[{String, String}]}  [ List = [{Display, Value}] ] is property of content control List
+	 * @param {ContentControlProperties}  [ commonPr = {} ] is property of content control
 	 * @example
 	 * var type = 1; //1 - ComboBox  0 - DropDownList
-	 * var List = [{sDisplay: "Item1_D", sValue: "Item1_V"}, {sDisplay: "Item2_D", sValue: "Item2_V"}];
-	 * window.Asc.plugin.executeMethod("AddContentControlList", [type, List]);
+	 * var List = [{Display: "Item1_D", Value: "Item1_V"}, {Display: "Item2_D", Value: "Item2_V"}];
+	 * var commonPr = {"Id": 100, "Tag": "CC_Tag", "Lock": 3};
+	 * window.Asc.plugin.executeMethod("AddContentControlList", [type, List, commonPr]);
 	 */
-	window["asc_docs_api"].prototype["pluginMethod_AddContentControlList"] = function(type, List)
+	window["asc_docs_api"].prototype["pluginMethod_AddContentControlList"] = function(type, List, commonPr)
 	{
 		var oPr;
 		if (List)
 		{
 			oPr = new AscCommon.CSdtComboBoxPr();
 			List.forEach(function(el) {
-				oPr.AddItem(el.sDisplay, el.sValue);
+				oPr.AddItem(el.Display, el.Value);
 			});
 		}
-		this.asc_AddContentControlList(type, oPr);
+
+		var _content_control_pr;
+		if (commonPr)
+		{
+			_content_control_pr      = new AscCommon.CContentControlPr();
+			_content_control_pr.Id   = commonPr["Id"];
+			_content_control_pr.Tag  = commonPr["Tag"];
+			_content_control_pr.Lock = commonPr["Lock"];
+
+			_content_control_pr.Alias = commonPr["Alias"];
+
+			if (undefined !== commonPr["Appearance"])
+				_content_control_pr.Appearance = commonPr["Appearance"];
+
+			if (undefined !== commonPr["Color"])
+				_content_control_pr.Color = new Asc.asc_CColor(commonPr["Color"]["R"], commonPr["Color"]["G"], commonPr["Color"]["B"]);
+		}
+
+		this.asc_AddContentControlList(type, oPr, null, _content_control_pr);
 	};
 
 	/**
@@ -141,7 +200,8 @@
 	 * @memberof Api
 	 * @typeofeditors ["CDE"]
 	 * @alias AddContentControlDatePicker
-	 * @param {ContentControlDatePickerProperties}  [ properties = {} ] is property of content control datepicker
+	 * @param {ContentControlDatePickerProperties}  [ datePickerPr = {} ] is property of content control datepicker
+	 * @param {ContentControlProperties}  [ commonPr = {} ] is property of content control
 	 * @example
 	 * var DateFormats = [
 	 * "MM/DD/YYYY",
@@ -159,21 +219,40 @@
 	 * "hh:mm:ss:\ AM/PM"
 	 * ];
 	 * var Date = new window.Date();
-	 * var properties = {"DateFormat" : DateFormats[2], "Date" : Date};
-	 * window.Asc.plugin.executeMethod("AddContentControlDatePicker", [properties]);
+	 * var datePickerPr = {"DateFormat" : DateFormats[2], "Date" : Date};
+	 * var commonPr = {"Id": 100, "Tag": "CC_Tag", "Lock": 3};
+	 * window.Asc.plugin.executeMethod("AddContentControlDatePicker", [datePickerPr, commonPr]);
 	 */
-	window["asc_docs_api"].prototype["pluginMethod_AddContentControlDatePicker"] = function(properties)
+	window["asc_docs_api"].prototype["pluginMethod_AddContentControlDatePicker"] = function(datePickerPr, commonPr)
 	{
 		var oPr;
-		if (properties)
+		if (datePickerPr)
 		{
 			oPr = new AscCommon.CSdtDatePickerPr();
-			if (properties.Date)
-				oPr.SetFullDate(properties.Date);
-			if (properties.DateFormat)
-				oPr.SetDateFormat(properties.DateFormat);
+			if (datePickerPr.Date)
+				oPr.SetFullDate(datePickerPr.Date);
+			if (datePickerPr.DateFormat)
+				oPr.SetDateFormat(datePickerPr.DateFormat);
 		}
-		this.asc_AddContentControlDatePicker(oPr);
+
+		var _content_control_pr;
+		if (commonPr)
+		{
+			_content_control_pr      = new AscCommon.CContentControlPr();
+			_content_control_pr.Id   = commonPr["Id"];
+			_content_control_pr.Tag  = commonPr["Tag"];
+			_content_control_pr.Lock = commonPr["Lock"];
+
+			_content_control_pr.Alias = commonPr["Alias"];
+
+			if (undefined !== commonPr["Appearance"])
+				_content_control_pr.Appearance = commonPr["Appearance"];
+
+			if (undefined !== commonPr["Color"])
+				_content_control_pr.Color = new Asc.asc_CColor(commonPr["Color"]["R"], commonPr["Color"]["G"], commonPr["Color"]["B"]);
+		}
+
+		this.asc_AddContentControlDatePicker(oPr, _content_control_pr);
 	};
 
 })(window);
