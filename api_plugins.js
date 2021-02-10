@@ -40,31 +40,16 @@
 	 * @typeofeditors ["CDE"]
 	 * @alias AddContentControl
 	 * @param {ContentControlType} type is a numeric value that specifies the content control type
-	 * @param {ContentControlProperties}  [ properties = {} ] is property of content control
+	 * @param {ContentControlProperties}  [ commonPr = {} ] is property of content control
 	 * @returns {ContentControl} return json with "Tag", "Id", "Lock" and "InternalId" values of created content control
 	 * @example
 	 * var type = 1;
 	 * var properties = {"Id": 100, "Tag": "CC_Tag", "Lock": 3};
 	 * window.Asc.plugin.executeMethod("AddContentControl", [type, properties]);
 	 */
-	window["asc_docs_api"].prototype["pluginMethod_AddContentControl"] = function(type, properties)
+	window["asc_docs_api"].prototype["pluginMethod_AddContentControl"] = function(type, commonPr)
 	{
-		var _content_control_pr;
-		if (properties)
-		{
-			_content_control_pr      = new AscCommon.CContentControlPr();
-			_content_control_pr.Id   = properties["Id"];
-			_content_control_pr.Tag  = properties["Tag"];
-			_content_control_pr.Lock = properties["Lock"];
-
-			_content_control_pr.Alias = properties["Alias"];
-
-			if (undefined !== properties["Appearance"])
-				_content_control_pr.Appearance = properties["Appearance"];
-
-			if (undefined !== properties["Color"])
-				_content_control_pr.Color = new Asc.asc_CColor(properties["Color"]["R"], properties["Color"]["G"], properties["Color"]["B"]);
-		}
+		var _content_control_pr = private_ReadContentControlCommonPr(commonPr);
 
 		var _obj = this.asc_AddContentControl(type, _content_control_pr);
 		if (!_obj)
@@ -98,22 +83,7 @@
 				oPr.SetUncheckedSymbol(checkBoxPr["UncheckedSymbol"]);
 		}
 
-		var _content_control_pr;
-		if (commonPr)
-		{
-			_content_control_pr      = new AscCommon.CContentControlPr();
-			_content_control_pr.Id   = commonPr["Id"];
-			_content_control_pr.Tag  = commonPr["Tag"];
-			_content_control_pr.Lock = commonPr["Lock"];
-
-			_content_control_pr.Alias = commonPr["Alias"];
-
-			if (undefined !== commonPr["Appearance"])
-				_content_control_pr.Appearance = commonPr["Appearance"];
-
-			if (undefined !== commonPr["Color"])
-				_content_control_pr.Color = new Asc.asc_CColor(commonPr["Color"]["R"], commonPr["Color"]["G"], commonPr["Color"]["B"]);
-		}
+		var _content_control_pr = private_ReadContentControlCommonPr(commonPr);
 
 		this.asc_AddContentControlCheckBox(oPr, null, _content_control_pr);
 	};
@@ -130,22 +100,7 @@
 	 */
 	window["asc_docs_api"].prototype["pluginMethod_AddContentControlPicture"] = function(commonPr)
 	{
-		var _content_control_pr;
-		if (commonPr)
-		{
-			_content_control_pr      = new AscCommon.CContentControlPr();
-			_content_control_pr.Id   = commonPr["Id"];
-			_content_control_pr.Tag  = commonPr["Tag"];
-			_content_control_pr.Lock = commonPr["Lock"];
-
-			_content_control_pr.Alias = commonPr["Alias"];
-
-			if (undefined !== commonPr["Appearance"])
-				_content_control_pr.Appearance = commonPr["Appearance"];
-
-			if (undefined !== commonPr["Color"])
-				_content_control_pr.Color = new Asc.asc_CColor(commonPr["Color"]["R"], commonPr["Color"]["G"], commonPr["Color"]["B"]);
-		}
+		var _content_control_pr = private_ReadContentControlCommonPr(commonPr);
 
 		this.asc_AddContentControlPicture(null, _content_control_pr);
 	};
@@ -175,22 +130,7 @@
 			});
 		}
 
-		var _content_control_pr;
-		if (commonPr)
-		{
-			_content_control_pr      = new AscCommon.CContentControlPr();
-			_content_control_pr.Id   = commonPr["Id"];
-			_content_control_pr.Tag  = commonPr["Tag"];
-			_content_control_pr.Lock = commonPr["Lock"];
-
-			_content_control_pr.Alias = commonPr["Alias"];
-
-			if (undefined !== commonPr["Appearance"])
-				_content_control_pr.Appearance = commonPr["Appearance"];
-
-			if (undefined !== commonPr["Color"])
-				_content_control_pr.Color = new Asc.asc_CColor(commonPr["Color"]["R"], commonPr["Color"]["G"], commonPr["Color"]["B"]);
-		}
+		var _content_control_pr = private_ReadContentControlCommonPr(commonPr);
 
 		this.asc_AddContentControlList(type, oPr, null, _content_control_pr);
 	};
@@ -235,24 +175,30 @@
 				oPr.SetDateFormat(datePickerPr.DateFormat);
 		}
 
-		var _content_control_pr;
-		if (commonPr)
-		{
-			_content_control_pr      = new AscCommon.CContentControlPr();
-			_content_control_pr.Id   = commonPr["Id"];
-			_content_control_pr.Tag  = commonPr["Tag"];
-			_content_control_pr.Lock = commonPr["Lock"];
-
-			_content_control_pr.Alias = commonPr["Alias"];
-
-			if (undefined !== commonPr["Appearance"])
-				_content_control_pr.Appearance = commonPr["Appearance"];
-
-			if (undefined !== commonPr["Color"])
-				_content_control_pr.Color = new Asc.asc_CColor(commonPr["Color"]["R"], commonPr["Color"]["G"], commonPr["Color"]["B"]);
-		}
+		var _content_control_pr = private_ReadContentControlCommonPr(commonPr);
 
 		this.asc_AddContentControlDatePicker(oPr, _content_control_pr);
 	};
+
+	function private_ReadContentControlCommonPr(commonPr)
+	{
+		var resultPr;
+		if (commonPr)
+		{
+			resultPr      = new AscCommon.CContentControlPr();
+			resultPr.Id   = commonPr["Id"];
+			resultPr.Tag  = commonPr["Tag"];
+			resultPr.Lock = commonPr["Lock"];
+
+			resultPr.Alias = commonPr["Alias"];
+
+			if (undefined !== commonPr["Appearance"])
+				resultPr.Appearance = commonPr["Appearance"];
+
+			if (undefined !== commonPr["Color"])
+				resultPr.Color = new Asc.asc_CColor(commonPr["Color"]["R"], commonPr["Color"]["G"], commonPr["Color"]["B"]);
+		}
+		return resultPr;
+	}
 
 })(window);
