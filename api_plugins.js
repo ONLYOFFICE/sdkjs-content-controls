@@ -185,11 +185,11 @@
 		var resultPr;
 		if (commonPr)
 		{
-			resultPr      = new AscCommon.CContentControlPr();
-			resultPr.Id   = commonPr["Id"];
-			resultPr.Tag  = commonPr["Tag"];
-			resultPr.Lock = commonPr["Lock"];
+			resultPr = new AscCommon.CContentControlPr();
 
+			resultPr.Id    = commonPr["Id"];
+			resultPr.Tag   = commonPr["Tag"];
+			resultPr.Lock  = commonPr["Lock"];
 			resultPr.Alias = commonPr["Alias"];
 
 			if (undefined !== commonPr["Appearance"])
@@ -197,7 +197,11 @@
 
 			if (undefined !== commonPr["Color"])
 				resultPr.Color = new Asc.asc_CColor(commonPr["Color"]["R"], commonPr["Color"]["G"], commonPr["Color"]["B"]);
+
+			if (undefined !== commonPr["PlaceHolderText"])
+				resultPr.SetPlaceholderText(commonPr["PlaceHolderText"]);
 		}
+
 		return resultPr;
 	}
 
