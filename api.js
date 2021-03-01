@@ -93,6 +93,23 @@
 		var oLogicDocument = this.private_GetLogicDocument();
 		if (!oLogicDocument)
 			return;
+		
+		if (oPr && oFormPr)
+		{
+			if (oPr.GroupKey)
+			{
+				oPr.CheckedSymbol   = 0x25C9;
+				oPr.UncheckedSymbol = 0x25CB;
+			}
+			else
+			{
+				oPr.CheckedSymbol   = 0x2611;
+				oPr.UncheckedSymbol = 0x2610;
+			}
+			
+			oPr.CheckedFont   = "Segoe UI Symbol";
+			oPr.UncheckedFont = "Segoe UI Symbol";
+		}
 
 		if (oPr && oPr.CheckedSymbol)
 			AscFonts.FontPickerByCharacter.getFontBySymbol(oPr.CheckedSymbol);
@@ -124,7 +141,10 @@
 
 				var oCC = oLogicDocument.AddContentControlCheckBox(oPr);
 				if (oCC && oFormPr)
+				{
 					oCC.SetFormPr(oFormPr);
+					oCC.UpdatePlaceHolderTextPrForForm();
+				}
 
 				oLogicDocument.UpdateInterface();
 				oLogicDocument.Recalculate();
@@ -145,7 +165,10 @@
 
 			var oCC = oLogicDocument.AddContentControlPicture();
 			if (oCC && oFormPr)
+			{
 				oCC.SetFormPr(oFormPr);
+				oCC.UpdatePlaceHolderTextPrForForm();
+			}
 
 			oLogicDocument.UpdateInterface();
 			oLogicDocument.Recalculate();
@@ -170,7 +193,10 @@
 				oCC = oLogicDocument.AddContentControlDropDownList(oPr);
 
 			if (oCC && oFormPr)
+			{
 				oCC.SetFormPr(oFormPr);
+				oCC.UpdatePlaceHolderTextPrForForm();
+			}
 
 			oLogicDocument.Recalculate();
 			oLogicDocument.UpdateInterface();
@@ -208,7 +234,10 @@
 
 			var oCC = oLogicDocument.AddContentControlTextForm(oPr);
 			if (oCC && oFormPr)
+			{
 				oCC.SetFormPr(oFormPr);
+				oCC.UpdatePlaceHolderTextPrForForm();
+			}
 
 			oLogicDocument.UpdateInterface();
 			oLogicDocument.Recalculate();
