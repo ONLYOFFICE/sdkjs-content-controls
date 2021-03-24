@@ -240,7 +240,6 @@
 		if (!oLogicDocument)
 			return;
 
-		oLogicDocument.RemoveTextSelection();
 		if (!oLogicDocument.IsSelectionLocked(AscCommon.changestype_Paragraph_Content))
 		{
 			oLogicDocument.StartAction(AscDFH.historydescription_Document_AddContentControlTextForm);
