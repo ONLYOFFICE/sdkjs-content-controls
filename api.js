@@ -88,7 +88,7 @@
 		}
 		return oResult;
 	};
-	window['Asc']['asc_docs_api'].prototype['asc_AddContentControlCheckBox'] = window['Asc']['asc_docs_api'].prototype.asc_AddContentControlCheckBox = function(oPr, oFormPr)
+	window['Asc']['asc_docs_api'].prototype['asc_AddContentControlCheckBox'] = window['Asc']['asc_docs_api'].prototype.asc_AddContentControlCheckBox = function(oPr, oFormPr, oCommonPr)
 	{
 		var oLogicDocument = this.private_GetLogicDocument();
 		if (!oLogicDocument)
@@ -146,13 +146,16 @@
 					oCC.UpdatePlaceHolderTextPrForForm();
 				}
 
+				if (oCC && oCommonPr)
+					oCC.SetContentControlPr(oCommonPr);
+
 				oLogicDocument.UpdateInterface();
 				oLogicDocument.Recalculate();
 				oLogicDocument.FinalizeAction();
 			}
 		});
 	};
-	window['Asc']['asc_docs_api'].prototype['asc_AddContentControlPicture'] = window['Asc']['asc_docs_api'].prototype.asc_AddContentControlPicture = function(oFormPr)
+	window['Asc']['asc_docs_api'].prototype['asc_AddContentControlPicture'] = window['Asc']['asc_docs_api'].prototype.asc_AddContentControlPicture = function(oFormPr, oCommonPr)
 	{
 		var oLogicDocument = this.private_GetLogicDocument();
 		if (!oLogicDocument)
@@ -170,12 +173,15 @@
 				oCC.UpdatePlaceHolderTextPrForForm();
 			}
 
+			if (oCC && oCommonPr)
+				oCC.SetContentControlPr(oCommonPr);
+
 			oLogicDocument.UpdateInterface();
 			oLogicDocument.Recalculate();
 			oLogicDocument.FinalizeAction();
 		}
 	};
-	window['Asc']['asc_docs_api'].prototype['asc_AddContentControlList'] = window['Asc']['asc_docs_api'].prototype.asc_AddContentControlList = function(isComboBox, oPr, oFormPr)
+	window['Asc']['asc_docs_api'].prototype['asc_AddContentControlList'] = window['Asc']['asc_docs_api'].prototype.asc_AddContentControlList = function(isComboBox, oPr, oFormPr, oCommonPr)
 	{
 		var oLogicDocument = this.private_GetLogicDocument();
 		if (!oLogicDocument)
@@ -198,13 +204,16 @@
 				oCC.UpdatePlaceHolderTextPrForForm();
 			}
 
+			if (oCC && oCommonPr)
+				oCC.SetContentControlPr(oCommonPr);
+
 			oLogicDocument.Recalculate();
 			oLogicDocument.UpdateInterface();
 			oLogicDocument.UpdateSelection();
 			oLogicDocument.FinalizeAction();
 		}
 	};
-	window['Asc']['asc_docs_api'].prototype['asc_AddContentControlDatePicker'] = window['Asc']['asc_docs_api'].prototype.asc_AddContentControlDatePicker = function(oPr)
+	window['Asc']['asc_docs_api'].prototype['asc_AddContentControlDatePicker'] = window['Asc']['asc_docs_api'].prototype.asc_AddContentControlDatePicker = function(oPr, oCommonPr)
 	{
 		var oLogicDocument = this.private_GetLogicDocument();
 		if (!oLogicDocument)
@@ -214,7 +223,11 @@
 		if (!oLogicDocument.IsSelectionLocked(AscCommon.changestype_Paragraph_Content))
 		{
 			oLogicDocument.StartAction(AscDFH.historydescription_Document_AddContentControlList);
-			oLogicDocument.AddContentControlDatePicker(oPr);
+			var oCC = oLogicDocument.AddContentControlDatePicker(oPr, oCommonPr);
+
+			if (oCC && oCommonPr)
+				oCC.SetContentControlPr(oCommonPr);
+
 			oLogicDocument.Recalculate();
 			oLogicDocument.UpdateInterface();
 			oLogicDocument.UpdateSelection();
@@ -227,7 +240,6 @@
 		if (!oLogicDocument)
 			return;
 
-		oLogicDocument.RemoveTextSelection();
 		if (!oLogicDocument.IsSelectionLocked(AscCommon.changestype_Paragraph_Content))
 		{
 			oLogicDocument.StartAction(AscDFH.historydescription_Document_AddContentControlTextForm);
