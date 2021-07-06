@@ -171,7 +171,7 @@
 			{
 				oCC.SetFormPr(oFormPr);
 				oCC.UpdatePlaceHolderTextPrForForm();
-				oCC.ConvertFormToAnchor();
+				oCC.ConvertFormToFixed();
 				oCC.SetPictureFormPr(new AscCommon.CSdtPictureFormPr());
 			}
 
