@@ -171,6 +171,8 @@
 			{
 				oCC.SetFormPr(oFormPr);
 				oCC.UpdatePlaceHolderTextPrForForm();
+				oCC.ConvertFormToFixed();
+				oCC.SetPictureFormPr(new AscCommon.CSdtPictureFormPr());
 			}
 
 			if (oCC && oCommonPr)
